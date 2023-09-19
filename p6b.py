@@ -1,22 +1,25 @@
-import requests as req
+"""Write a python program to accept a file name from the user and perform the following
+operations
+1. Display the first N line of the file
+2. Find the frequency of occurrence of the word accepted from the user in the
+file"""
+
 import os
-import bs4
+import sys
+import pathlib
+import zipfile
 
-url = 'https://xkcd.com/'
-if not os.path.isdir('xkcd'):
-    os.makedirs('xkcd')
+dirName = input("Enter Directory name that you want to backup : ")
 
-for i in range(100, 110):
-    temp = url + str(i)
-    print('Downloading image from %s...' % temp)
-    res = req.get(temp)
-    soup = bs4.BeautifulSoup(res.text, 'html.parser')
-    comicElem = soup.select('#comic img')
-    comicUrl = 'https:' + comicElem[0].get('src')
-    res = req.get(comicUrl)
-    imageFile = open(os.path.join('xkcd', os.path.basename(comicUrl)), 'wb')
-    for chunk in res.iter_content(100000):
-        imageFile.write(chunk)
-    imageFile.close()
+if not os.path.isdir(dirName):
+    print("Directory", dirName, "doesn't exists")
+    sys.exit(0)
 
-print('Successfully downloaded')
+curDirectory = pathlib.Path(dirName)
+with zipfile.ZipFile("myZip.zip", mode="w") as archive:
+    for file_path in curDirectory.rglob("*"):
+        archive.write(file_path, arcname=file_path.relative_to(curDirectory))
+if os.path.isfile("myZip.zip"):
+    print("Archive", "myZip.zip", "created successfully")
+else:
+    print("Error in creating zip archive")
