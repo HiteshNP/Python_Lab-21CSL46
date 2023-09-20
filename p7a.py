@@ -45,7 +45,7 @@ class Triangle(Shape):
         self.height = height
 
     def calcArea(self):
-        self.area = (self.base * self.height) / 2
+        self.area = self.base * self.height / 2
 
 
 r = int(input("Enter the radius of the circle: "))
