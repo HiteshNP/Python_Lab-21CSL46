@@ -17,7 +17,6 @@ class Circle(Shape):
     def __init__(self, radius):
 
         super().__init__()
-        self.area = 0
         self.name = "Circle"
         self.radius = radius
 
@@ -29,7 +28,6 @@ class Rectangle(Shape):
     def __init__(self, length, breadth):
 
         super().__init__()
-        self.area = 0
         self.name = "Rectangle"
         self.length = length
         self.breadth = breadth
@@ -42,7 +40,6 @@ class Triangle(Shape):
     def __init__(self, base, height):
 
         super().__init__()
-        self.area = 0
         self.name = "Triangle"
         self.base = base
         self.height = height
