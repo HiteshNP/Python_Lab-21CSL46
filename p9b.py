@@ -25,9 +25,14 @@ for i in range(2, 5):
 
 wb.save("demo.xlsx")
 srchCode = input("Enter state code: ")
+found = False
 for i in range(2, 5):
     data = sheet.cell(row=i, column=3).value
     if data == srchCode:
         print("Corresponding capital for code", srchCode, "is", sheet.cell(row=i, column=4).value, "and language is",
               sheet.cell(row=i, column=2).value)
+        found = True
+
+if not found:
+    print('Invalid Code')
 wb.close()
